@@ -1,0 +1,23 @@
+{
+  "name": "quoi-server",
+  "version": "0.0.1",
+  "description": "JavaScript/Express API server for Quoi, my Galvanize Capstone project.",
+  "main": "server.js",
+  "scripts": {
+    "test": "jest",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KevinUSCU/quoi-server.git"
+  },
+  "keywords": [
+    "quiz"
+  ],
+  "author": "Kevin Springer",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KevinUSCU/quoi-server/issues"
+  },
+  "homepage": "https://github.com/KevinUSCU/quoi-server#readme"
+}
