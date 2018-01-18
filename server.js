@@ -1,3 +1,7 @@
+/*--- Load Environment Options ---*/
+const environment = process.env.NODE_ENV //NODE_ENV set in package.json scripts
+require('dotenv').load() //load additional config options from .env
+
 /*--- Required Libraries ---*/
 const express = require('express')
 const bodyParser = require('body-parser')
@@ -7,23 +11,13 @@ const cors = require('cors')
 const processErrorMessage = require('./models/error.model')
 
 /*--- Initialize Server ---*/
-require('dotenv').load() //get config options from .env
 const app = express()
-if (process.env.NODE_ENV !== 'development') app.disable('x-powered-by')
+if (environment !== 'development') app.disable('x-powered-by')
 app.use(bodyParser.json())
 app.use(morgan('dev'))
 //set Cors options
-if (environment === 'production') {
-  var corsOptions = {
-    origin: process.env.CORS_ORIGIN,
-    optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204 
-  }  
-} else {
-  var corsOptions = {
-    origin: 'http://127.0.0.1:8080',
-    optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204 
-  }
-}
+const corsOrigin = environment === 'production' ? process.env.CORS_ORIGIN : 'http://127.0.0.1:8080'
+const corsOptions = { origin: corsOrigin, optionsSuccessStatus: 200 }
 app.use(cors(corsOptions))
 
 /*--- Routes ---*/
