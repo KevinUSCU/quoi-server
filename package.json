@@ -6,7 +6,8 @@
   "scripts": {
     "test": "NODE_ENV=test jest",
     "start": "NODE_ENV=production node ./bin/www",
-    "dev": "NODE_ENV=development nodemon ./bin/www"
+    "dev": "NODE_ENV=development nodemon ./bin/www",
+    "knex": "knex"
   },
   "repository": {
     "type": "git",
