@@ -4,7 +4,7 @@
 
 ## Database Structure
 
-![](./db/)
+![](./db/quoi-erd.png)
 
 ## Installation
 1. npm install
