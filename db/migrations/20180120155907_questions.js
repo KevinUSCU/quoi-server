@@ -7,7 +7,7 @@ exports.up = function(knex, Promise) {
     table.string('answer').notNullable().defaultTo('')
     table.string('explanation').defaultTo(null)
     table.integer('infopedia_id').notNullable()
-    table.foreign('infopedia_id').references('cyclopedia.id')
+    table.foreign('infopedia_id').references('infopedia.id')
     table.string('image_url').defaultTo(null)
     table.boolean('edited').notNullable().defaultTo(false)
     table.boolean('deleted').notNullable().defaultTo(false)
