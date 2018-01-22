@@ -5,7 +5,7 @@ exports.seed = function(knex, Promise) {
     .then(() => knex('daily_questions').del())
     .then(() => knex('infopedia').del())
     .then(() => knex('questions').del())
-    .then(() => knex('users_auth').del())
+    .then(() => knex('auth').del())
     .then(() => knex('users').del())
     .then(() => knex('tips').del())
 }
