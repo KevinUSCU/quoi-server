@@ -2,7 +2,7 @@ exports.seed = function(knex, Promise) {
   return knex('questions').insert([
     { 
       id: 1,
-      type: 'multiple_choice',
+      type_id: 1,
       question: 'Which of the following is an example of a function declaration?',
       choices: 'function x(y) { return y + 1 }, var x = function(y) { return y + 1 }, x = (y) => y + 1',
       answer: '1',
@@ -12,7 +12,7 @@ exports.seed = function(knex, Promise) {
     },
     { 
       id: 2,
-      type: 'multiple_choice',
+      type_id: 1,
       question: 'What is the default return value of a function in JavaScript?',
       choices: 'true, 0, undefined, false, NaN',
       answer: '3',
@@ -22,7 +22,7 @@ exports.seed = function(knex, Promise) {
     },
     { 
       id: 3,
-      type: 'multiple_choice',
+      type_id: 1,
       question: 'Which of the following is NOT a native JavaScript string method?',
       choices: '.slice(), .replace(), .substr(), .toUpperCase(), .splice()',
       answer: '5',

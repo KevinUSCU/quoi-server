@@ -8,4 +8,6 @@ exports.seed = function(knex, Promise) {
     .then(() => knex('auth').del())
     .then(() => knex('users').del())
     .then(() => knex('tips').del())
+    .then(() => knex('question_types').del())
+    .then(() => knex('user_roles').del())
 }

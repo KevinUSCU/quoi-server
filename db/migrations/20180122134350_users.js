@@ -3,7 +3,8 @@ exports.up = function(knex, Promise) {
     table.increments()
     table.string('firstname').notNullable().defaultTo('')
     table.string('lastname').notNullable().defaultTo('')
-    table.enum('role', [ 'admin', 'user' ]).defaultTo('user')
+    table.integer('role_id').notNullable()
+    table.foreign('role_id').references('user_roles.id')
     table.timestamps(true, true)
   })
 }

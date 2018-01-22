@@ -1,7 +1,8 @@
 exports.up = function(knex, Promise) {
   return knex.schema.createTable('questions', (table) => {
     table.increments()
-    table.enu('type', [ 'multiple_choice' ]).defaultTo('multiple_choice')
+    table.integer('type_id').notNullable()
+    table.foreign('type_id').references('question_types.id')
     table.string('question').notNullable().defaultTo('')
     table.string('choices').defaultTo(null)
     table.string('answer').notNullable().defaultTo('')
