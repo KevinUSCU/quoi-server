@@ -1,4 +1,5 @@
-require('dotenv').load()
+process.env.SECRET_KEY = 'secret'
+
 const model = require('../models/token.model')
 
 describe('Token Model', () => {
