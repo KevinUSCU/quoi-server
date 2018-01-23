@@ -33,7 +33,7 @@ describe('Auth Model', () => {
       return expect(model.find('admin@email.com')).resolves.toMatchObject(user)
     })
     test('It should return undefined when an invalid email is provided', () => {
-      return expect(model.find('notPresent')).resolves.toBe(undefined)
+      return expect(model.find('notPresent')).resolves.toBe(null)
     })
   })
 
