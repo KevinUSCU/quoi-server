@@ -21,18 +21,18 @@ const corsOptions = { origin: corsOrigin, optionsSuccessStatus: 200 }
 app.use(cors(corsOptions))
 
 /*--- Routes ---*/
-// const {
-//   AuthRouter,
-//   UsersRouter
-// } = require('./routes')
-// app.use('/api/auth', AuthRouter)
-// app.use('/api/users', UsersRouter)
+const {
+  AuthRouter,
+  UsersRouter
+} = require('./routes')
+app.use('/api/auth', AuthRouter)
+app.use('/api/users', UsersRouter)
 
 
 /*--- Error handlers ---*/
 app.use((req, res) => {
   const status = 404;
-  const message = `Could not ${req.method} ${req.path}`
+  const message = `Could not ${req.method} to ${req.path}`
   res.status(status).json({ status, message })
 })
 
@@ -40,7 +40,7 @@ app.use((err, _req, res, _next) => {
   //parse error message
   err = processErrorMessage(err)
   //errors dispatched to client are also displayed on server console if following env variable is 'true'
-  if (process.env.PRINT_CLIENT_ERRORS_ON_SERVER) console.error(err)
+  if (process.env.PRINT_CLIENT_ERRORS_ON_SERVER) console.error('Error dispatched to client:', err)
   //dispatch error to client
   const status = err.status || 500;
   const message = err.message || 'Something went wrong!'
