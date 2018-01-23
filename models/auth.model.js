@@ -10,8 +10,8 @@ class AuthModel extends Model {
 
   static find (email) {
     return db('auth')
-    .where({ email })
-    .first()
+      .where({ email })
+      .first()
   }
 
   static update (userId, body) {
