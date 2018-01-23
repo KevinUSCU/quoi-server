@@ -9,6 +9,11 @@
     "dev": "NODE_ENV=development nodemon ./bin/www",
     "knex": "knex"
   },
+  "jest": {
+    "verbose": true,
+    "globalSetup": "./test/setup",
+    "globalTeardown": "./test/teardown"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/KevinUSCU/quoi-server.git"
