@@ -23,10 +23,12 @@ app.use(cors(corsOptions))
 /*--- Routes ---*/
 const {
   AuthRouter,
+  InfopediaRouter,
   TipsRouter,
   UsersRouter
 } = require('./routes')
 app.use('/api/auth', AuthRouter)
+app.use('/api/infopedia', InfopediaRouter)
 app.use('/api/tips', TipsRouter)
 app.use('/api/users', UsersRouter)
 
