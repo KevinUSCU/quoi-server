@@ -2,15 +2,6 @@ module.exports = name => {
   const Model = require('../models')[`${name}Model`]
 
   class Controller {
-    static exists (req, res, next) {
-      Model.find(req.params.id)
-      .then(response => {
-        if (!reponse) throw new Error(`noSuch${name}`)
-        return next()
-      })
-      .catch(next)
-    }
-
     static index (req, res, next) {
       Model.all()
       .then(response => res.status(200).json({ [`${name}s`]: response }))
@@ -27,14 +18,19 @@ module.exports = name => {
     }
 
     static create (req, res, next) {
-      Model.create(req.body)
+      const payload = req.fields ? payloadBuilder(req) : null
+      Model.create(payload || req.body)
       .then(response => res.status(201).json({ [name]: response }))
       .catch(next)
     }
 
     static update (req, res, next) {
-      Model.update(req.params.id, req.body)
-      .then(response => res.status(200).json({ [name]: response }))
+      const payload = req.fields ? payloadBuilder(req) : null
+      Model.update(req.params.id, payload || req.body)
+      .then(response => {
+        if (!response) throw new Error(`noSuch${name}`)
+        res.status(200).json({ [name]: response })
+      })
       .catch(next)
     }
 
@@ -43,6 +39,22 @@ module.exports = name => {
       .then(response => res.status(204).json()) //no response body with 204
       .catch(next)
     }
+  }
+
+  function payloadBuilder(req) {
+    const { required, optional } = req.fields
+    const payload = {}
+    required.forEach(field => {
+      if (!req.body[field]) {
+        const capitalized = field.replace(/^\w/, letter => letter.toUpperCase())
+        throw new Error(`missing${capitalized}`)
+      }
+      payload[field] = req.body[field]
+    })
+    optional.forEach(field => {
+      if (req.body[field]) payload[field] = req.body[field]
+    })
+    return payload
   }
 
   return Controller
