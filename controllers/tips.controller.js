@@ -19,6 +19,10 @@ class TipsController extends Controller {
     return super.update(req, res, next)
   }
 
+  static tipOfTheDay (req, res, next) {
+    res.status(200).json({ Tip: TASKRUNNER.tipOfTheDay })
+  }
+
 }
 
 module.exports = TipsController
