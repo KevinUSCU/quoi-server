@@ -10,7 +10,7 @@ class AuthController extends Controller {
     if (!email) throw new Error('missingEmail')
     if (!password) throw new Error('missingPassword')
     //Retrieve matched user from database
-    AuthModel.find(email) 
+    AuthModel.findByEmail(email) 
     .then(user => {
       if (!user) throw new Error('noSuchUser')
       // Check for supplied password match against stored hash
@@ -31,7 +31,7 @@ class AuthController extends Controller {
     if (!email) throw new Error('missingEmail')
     if (!password) throw new Error('missingPassword')
     // Verify that email is unique
-    AuthModel.find(email)
+    AuthModel.findByEmail(email)
     .then(existingUser => {
       if (existingUser) throw new Error('duplicateUser')
       // If unique, add new user to users database; all new users created with role of 'user'

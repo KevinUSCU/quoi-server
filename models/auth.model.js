@@ -8,7 +8,7 @@ class AuthModel extends Model {
     throw new Error('Requesting all entries is not allowed per security policy')
   }
 
-  static find (email) {
+  static findByEmail (email) {
     return db('auth')
       .where({ email })
       .first()
