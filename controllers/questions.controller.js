@@ -8,7 +8,7 @@ class QuestionsController extends Controller {
       required: ['type_id', 'question', 'answer' ],
       optional: ['choices', 'explanation', 'infopedia_id', 'image_url' ]
     }
-    return super.create(req, res, next)
+    super.create(req, res, next)
   }
 
   static update (req, res, next) {
@@ -17,7 +17,7 @@ class QuestionsController extends Controller {
       optional: [ 'type_id', 'question', 'choices', 'answer', 'explanation', 'infopedia_id', 'image_url', 'edited' ]
     }
     req.body.edited = true //mark as edited
-    return super.update(req, res, next)
+    super.update(req, res, next)
   }
 
   static destroy (req, res, next) { //questions cannot be removed; they are marked as deleted
@@ -26,7 +26,7 @@ class QuestionsController extends Controller {
       optional: [ 'deleted' ]
     }
     req.body.deleted = true
-    return super.update(req, res, next)
+    super.update(req, res, next)
   }
 
 }

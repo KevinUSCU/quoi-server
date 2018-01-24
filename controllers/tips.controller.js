@@ -8,7 +8,7 @@ class TipsController extends Controller {
       required: ['tip'],
       optional: []
     }
-    return super.create(req, res, next)
+    super.create(req, res, next)
   }
 
   static update (req, res, next) {
@@ -16,7 +16,7 @@ class TipsController extends Controller {
       required: ['tip'],
       optional: []
     }
-    return super.update(req, res, next)
+    super.update(req, res, next)
   }
 
   static tipOfTheDay (req, res, next) {

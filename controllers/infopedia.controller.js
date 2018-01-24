@@ -8,7 +8,7 @@ class InfopediaController extends Controller {
       required: ['category', 'title', 'description'],
       optional: []
     }
-    return super.create(req, res, next)
+    super.create(req, res, next)
   }
 
   static update (req, res, next) {
@@ -16,7 +16,7 @@ class InfopediaController extends Controller {
       required: [],
       optional: ['category', 'title', 'description']
     }
-    return super.update(req, res, next)
+    super.update(req, res, next)
   }
 
   static destroy (req, res, next) {
