@@ -2,55 +2,32 @@ const db = require('../db/knex')
 
 module.exports = tableName => {
   class Model {
-    static all (userId) {
-      if (userId) {
-        return db(tableName)
-        .where({ user_id: userId })
-      }
+    static all () {
       return db(tableName)
     }
 
-    static find (id, userId) {
-      if (userId) {
-        return db(tableName)
-        .where({ id, user_id: userId })
-        .first()
-      }
+    static find (id) {
       return db(tableName)
       .where({ id })
       .first()
     }
 
-    static create (body, userId) {
-      if (userId) body.user_id = userId
+    static create (body) {
       return db(tableName)
       .insert(body)
       .returning('*')
       .then(([ result ]) => result)
     }
 
-    static update (id, body, userId) {
-      if (userId) {
-        body.user_id = userId
-        return db(tableName)
-        .where({ id, user_id: userId })
-        .update(body)
-        .returning('*')
-        .then(([ result ]) => result)  
-      }
+    static update (id, body) {
       return db(tableName)
       .where({ id })
-      .update(body)
+      .update({ ...body, thisKeyIsSkipped: undefined })
       .returning('*')
       .then(([ result ]) => result)
     }
 
-    static destroy (id, userId) {
-      if (userId) {
-        return db(tableName)
-        .where({ id, user_id: userId })
-        .delete()  
-      }
+    static destroy (id) {
       return db(tableName)
       .where({ id })
       .delete()
