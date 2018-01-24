@@ -49,4 +49,10 @@ app.use((err, _req, res, _next) => {
   res.status(status).json({ status, message })
 })
 
+/*--- Server Tasks ---*/
+const stateFile = path.join(__dirname, 'db', 'server-state.json')
+const TaskrunnerModel = require('./models/taskrunner.model')
+global.TASKRUNNER = new TaskrunnerModel(stateFile)
+TASKRUNNER.start()
+
 module.exports = app
