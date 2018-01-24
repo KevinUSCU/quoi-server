@@ -1,5 +1,5 @@
 const fs = require('fs')
-const TipModel = require('./tip.model')
+const { TipModel } = require('./')
 
 class TaskrunnerModel {
 
@@ -21,10 +21,10 @@ class TaskrunnerModel {
 
   _update() {
     const currentDate = new Date().toISOString().substr(0,10)
-    if (currentDate > this.date) {
-      console.log('new day!') /////////////////////////////////////////////DON'T FORGET TO REMOVE!!!
+    if (currentDate > this.date) { //generate new daily data
+      console.log('Server has updated itself with new daily data.')
       this.date = currentDate
-      TipModel.randomNewTipOfTheDay() //generate new daily tip
+      TipModel.randomNewTipOfTheDay()
       .then(tip => {
         this.tipOfTheDay = tip
         fs.writeFileSync(this.stateFile, JSON.stringify({ date: this.date, tipOfTheDay: this.tipOfTheDay }))
