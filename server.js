@@ -23,16 +23,18 @@ app.use(cors(corsOptions))
 /*--- Routes ---*/
 const {
   AuthRouter,
+  TipsRouter,
   UsersRouter
 } = require('./routes')
 app.use('/api/auth', AuthRouter)
+app.use('/api/tips', TipsRouter)
 app.use('/api/users', UsersRouter)
 
 
 /*--- Error handlers ---*/
 app.use((req, res) => {
   const status = 404;
-  const message = `Could not ${req.method} to ${req.path}`
+  const message = `Could not ${req.method} at ${req.path}`
   res.status(status).json({ status, message })
 })
 
