@@ -1,5 +1,5 @@
 const Controller = require('./default.controller')('Infopedia') //Infopedia is the model name
-const { InfopediaModel } = require('../models')
+const { InfopediaModel, QuestionModel } = require('../models')
 
 class InfopediaController extends Controller {
 
@@ -17,6 +17,14 @@ class InfopediaController extends Controller {
       optional: ['category', 'title', 'description']
     }
     return super.update(req, res, next)
+  }
+
+  static destroy (req, res, next) {
+    return QuestionModel.removeInfoLinks(req.params.id) //remove links to article in questions table
+    .then(() => {
+      return super.destroy(req, res, next) //remove from infopedia table
+    })
+    .catch(next)
   }
 
 }
