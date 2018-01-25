@@ -1,0 +1,1 @@
+{"date":"2018-01-25","tipOfTheDay":"Use ternary notation! Instead of:\nif (x % 2 === 0) do this;\nelse do that;\nWrite: x % 2 ? this : that"}

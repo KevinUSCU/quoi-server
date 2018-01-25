@@ -8,14 +8,16 @@
 
 ## Installation
 1. npm install
+2. cp .env.sample .env
+3. cp db/server-state.json.sample db/server-state.json
 ### Development
-2. createdb quoi_dev
-3. npm run knex migrate:latest
-4. npm run knex seed:run
-5. npm run dev
+4. createdb quoi_dev
+5. npm run knex migrate:latest
+6. npm run knex seed:run
+7. npm run dev
 ### Testing
 (db is created and removed automatically by test)
-2. npm test
+4. npm test
 
 ### Tokens
 When a token is required for a route, it follows the following format:
