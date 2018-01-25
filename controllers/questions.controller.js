@@ -5,8 +5,8 @@ class QuestionsController extends Controller {
 
   static create (req, res, next) {
     req.fields = {
-      required: ['type_id', 'question', 'answer' ],
-      optional: ['choices', 'explanation', 'infopedia_id', 'image_url' ]
+      required: ['question', 'choices', 'answer' ],
+      optional: ['explanation', 'infopedia_id', 'image_url' ]
     }
     super.create(req, res, next)
   }
@@ -14,7 +14,7 @@ class QuestionsController extends Controller {
   static update (req, res, next) {
     req.fields = {
       required: [],
-      optional: [ 'type_id', 'question', 'choices', 'answer', 'explanation', 'infopedia_id', 'image_url', 'edited' ]
+      optional: [ 'question', 'choices', 'answer', 'explanation', 'infopedia_id', 'image_url', 'edited' ]
     }
     req.body.edited = true //mark as edited
     super.update(req, res, next)
