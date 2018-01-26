@@ -4,8 +4,7 @@ const { AuthController, UsersController } = require('../controllers')
 
 //CREATE USER should be done though auth/signup route
 
-// router.get('/fromToken', UsersController.showOneFromToken)
-
+router.get('/fromtoken', UsersController.showOneFromToken)
 router.get('/', UsersController.index)
 router.get('/:id', UsersController.show)
 
