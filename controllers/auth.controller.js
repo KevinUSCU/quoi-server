@@ -44,7 +44,7 @@ class AuthController extends Controller {
       return AuthModel.create(newUserAuth)
     })
     // Sign and return a token for the new user
-    .then(result => TokenModel.sign(result.user_id))
+    .then(newUser => TokenModel.sign(newUser.user_id))
     // Return token to client
     .then(token => res.status(201).json({ Auth: token }))
     .catch(next)
@@ -60,6 +60,22 @@ class AuthController extends Controller {
     .then(token => AuthModel.update(token.sub.id, { email, hashed_password }))
     .then(result => res.status(200).json({ Auth: result.user_id }))
     .catch(next)
+  }
+
+  static isAdmin (req, res, next) {
+
+  }
+
+  static isUser (req, res, next) {
+
+  }
+
+  static matchesUser (req, res, next) {
+
+  }
+
+  static matchesUserOrAdmin (req, res, next) {
+
   }
 
 }
