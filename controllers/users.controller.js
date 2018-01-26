@@ -4,18 +4,18 @@ const bcrypt = require('bcryptjs')
 
 class UsersController extends Controller {
 
-  // static showOneFromToken (req, res, next) {
-  //   // Validate and decode token
-  //   TokenModel.verifyAndExtractHeaderToken(req.headers)
-  //   .catch(err => { throw new Error('invalidToken') })
-  //   // Check for and retrieve user from database
-  //   .then(token => UserModel.find(token.sub.id))
-  //   .then(result => {
-  //     if (!result) throw new Error('noSuchUser')
-  //     return res.status(200).json({ User: result })
-  //   })
-  //   .catch(next)
-  // }
+  static showOneFromToken (req, res, next) {
+    // Validate and decode token
+    TokenModel.verifyAndExtractHeaderToken(req.headers)
+    .catch(err => { throw new Error('invalidToken') })
+    // Check for and retrieve user from database
+    .then(token => UserModel.find(token.sub.id))
+    .then(user => {
+      if (!user) throw new Error('noSuchUser')
+      return res.status(200).json({ User: user })
+    })
+    .catch(next)
+  }
 
   // static update (req, res, next) {
   //   // Role, email and password cannot be updated in this way
