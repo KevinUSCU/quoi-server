@@ -21,8 +21,8 @@
 
 ### Tokens
 When a token is required for a route, it follows the following format:
-* Requires a header with 'Authorization' key with a string value that is 'Bearer ' followed by the token value
-* Example: { Authorization: 'Bearer eyJhbGciOiJIUz.I1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiO' }  
+* Requires a header with 'authorization' key with a string value that is 'Bearer ' followed by the token value
+* Example: { authorization: 'Bearer eyJhbGciOiJIUz.I1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiO' }  
   (please note this is not an actual token)
 
 ### Routes Use

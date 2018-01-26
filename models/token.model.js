@@ -14,7 +14,7 @@ class Token {
   }
 
   static verifyAndExtractHeaderToken(header) {
-    const token = header.Authorization ? header.Authorization.replace('Bearer ', '') : null
+    const token = header.authorization ? header.authorization.replace('Bearer ', '') : null
     return verifyPromise(token, secret) //on success this returns the decoded token
   }
 }
