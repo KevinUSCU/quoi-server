@@ -5,7 +5,7 @@ class TipModel extends Model {
 
   static randomNewTipOfTheDay() {
     return db('tips')
-      .where({ used: false })
+    .where({ used: false })
     .then(tips => {
       if (tips.length === 0) return TipModel.resetTips()
       else return tips
