@@ -3,7 +3,7 @@ exports.up = function(knex, Promise) {
     table.increments()
     table.string('question').notNullable().defaultTo('')
     table.string('choices').notNullable().defaultTo('')
-    table.string('answer').notNullable().defaultTo('')
+    table.integer('answer').notNullable().defaultTo(-1)
     table.string('explanation').defaultTo(null)
     table.integer('infopedia_id').defaultTo(null)
     table.string('image_url').defaultTo(null)

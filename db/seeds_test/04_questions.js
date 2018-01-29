@@ -4,7 +4,7 @@ exports.seed = function(knex, Promise) {
       id: 1,
       question: 'Which of the following is an example of a function declaration?',
       choices: '["function x(y) { return y + 1 }", "var x = function(y) { return y + 1 }", "x = (y) => y + 1", "x += 3"]',
-      answer: '1',
+      answer: 0,
       explanation: 'An advantage to a function declaration in JavaScript is that it can be hoisted; you can use the function before you declare it.',
       infopedia_id: 1,
       image_url: null
@@ -13,7 +13,7 @@ exports.seed = function(knex, Promise) {
       id: 2,
       question: 'What is the default return value of a function in JavaScript?',
       choices: '["true", "0", "undefined", "false"]',
-      answer: '3',
+      answer: 2,
       explanation: "Keep in mind that some functions may have side effects in addition to a return value. For example, a function which calls console.log(x) might return 'undefined,' but will also print the value of 'x' to the console.",
       infopedia_id: null,
       image_url: null
@@ -22,7 +22,7 @@ exports.seed = function(knex, Promise) {
       id: 3,
       question: 'Which of the following is NOT a native JavaScript string method?',
       choices: '[".slice()", ".replace()", ".substr()", ".splice()"]',
-      answer: '4',
+      answer: 3,
       explanation: null,
       infopedia_id: null,
       image_url: null
