@@ -3,6 +3,22 @@ const { QuestionModel } = require('../models')
 
 class QuestionsController extends Controller {
 
+  static questionOfTheDay (req, res, next) {
+    res.status(200).json({ Question: TASKRUNNER.questionOfTheDay })
+  }
+
+  static dailyQuestionsIndex (req, res, next) {
+    QuestionModel.allDailyQuestions()
+    .then(response => res.status(200).json({ ['Questions']: response }))
+    .catch(next)
+  }
+
+  static dailyQuestionsForUser (req, res, next) {
+    QuestionModel.allDailyQuestionsForUser(req.params.userId)
+    .then(response => res.status(200).json({ ['Questions']: response }))
+    .catch(next)
+  }
+
   static create (req, res, next) {
     req.fields = {
       required: ['question', 'choices', 'answer' ],
