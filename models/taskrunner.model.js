@@ -21,8 +21,8 @@ class TaskrunnerModel {
   }
 
   _update() {
-    const currentDate = new Date().toISOString().substr(0,10)
-    if (currentDate > this.date) { //generate new daily data
+    const currentDate = new Date().toISOString().substr(0,10) // Get current date in format 2018-01-25
+    if (currentDate > this.date) { // Generate new daily data
       console.log('Server has updated itself with new daily data.')
       this.date = currentDate
       const promises = [ TipModel.randomNewTipOfTheDay(), QuestionModel.randomNewQuestionOfTheDay(currentDate) ]
