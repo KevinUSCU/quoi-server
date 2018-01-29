@@ -3,7 +3,7 @@ exports.seed = function(knex, Promise) {
     { 
       id: 1,
       question: 'Which of the following is an example of a function declaration?',
-      choices: '["function x(y) { return y + 1 }", "var x = function(y) { return y + 1 }", "x = (y) => y + 1, x += 3"]',
+      choices: '["function x(y) { return y + 1 }", "var x = function(y) { return y + 1 }", "x = (y) => y + 1", "x += 3"]',
       answer: '1',
       explanation: 'An advantage to a function declaration in JavaScript is that it can be hoisted; you can use the function before you declare it.',
       infopedia_id: 1,
