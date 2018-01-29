@@ -19,9 +19,9 @@ class QuestionModel extends Model {
 
   static randomNewQuestionOfTheDay(date) {
     return db('questions')
-    .where({ used: false, deleted: false })
+    .where({ used: false, deleted: false }) // We keep deleted questions in db, but don't use them in the question queue
     .then(questions => {
-      if (questions.length === 0) return QuestionModel.resetQuestions()
+      if (questions.length === 0) return QuestionModel.resetQuestions() // Once all questions have been used once, we start over
       else return questions
     })
     .then(questions => {
@@ -29,9 +29,9 @@ class QuestionModel extends Model {
       const question = questions[randomIndex]
       super.update(question.id, { used: true })
       // Add question to list of daily questions
-      db('daily_questions')
+      return db('daily_questions')
       .insert({ date, question_id: question.id })
-      return question
+      .then(() => question)
     })
   }
 
