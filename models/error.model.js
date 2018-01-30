@@ -2,9 +2,9 @@ function processErrorMessage(err) {
   /* This selectively prints errors to the server and client. In the default case, where the error comes from a function such as knex where sending details to the client may be a security concern, we send a generic message to the client while printing the details on the server. This process also helps prevent the continued execution of chained promises after an error is thrown. */
   if (err.message) {
     switch (err.message) {
-      // case 'cannotDeleteAdmin': return { status: 403, message: 'Administrator accounts cannot be deleted' }
+      case 'cannotDeleteAdmin': return { status: 403, message: 'Administrator accounts cannot be deleted' }
       case 'duplicateUser': return { status: 409, message: 'A user with this email address already exists' }
-      // case 'incorrectRoleType': return { status: 400, message: "Role attribute must be either 'admin' or 'user'" }
+      case 'incorrectRoleType': return { status: 400, message: "Role attribute must be either 'admin' or 'user'" }
       case 'invalidPassword': return { status: 401, message: 'Incorrect password' }
       case 'invalidToken': return { status: 401, message: 'A valid authorization token is required' }
       case 'missingAnswer': return { status: 400, message: 'You must provide an answer for the question' }
@@ -18,7 +18,7 @@ function processErrorMessage(err) {
       case 'missingRelevant': return { status: 400, message: 'The relevance of the question is required' }
       case 'missingTip': return { status: 400, message: 'A tip is required' }
       case 'missingTitle': return { status: 400, message: 'A title is required for the article' }
-      // case 'missingRole': return { status: 400, message: 'Role attribute is required'}
+      case 'missingRole': return { status: 400, message: 'Role attribute is required'}
       // case 'noSuchItem': return { status: 404, message: 'This item does not exist' }
       case 'noSuchRoute': return { status: 404, message: 'This is not a valid route' }
       case 'noSuchInfopedia': return { status: 404, message: 'This infopedia article does not exist' }
