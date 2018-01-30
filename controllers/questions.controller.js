@@ -22,18 +22,22 @@ class QuestionsController extends Controller {
   static recordDailyQuestionAnswerForUser (req, res, next) {
     const userId = req.params.userId
     const { answer, considersRelevant } = req.body
+
     const date = TASKRUNNER.date
     const question = TASKRUNNER.questionOfTheDay
+    
     if (!Number(userId)) throw new Error(`noSuchRoute`) // Catch malformed routes
     if (!answer) throw new Error('missingAnswer')
     if (typeof considersRelevant !== 'boolean') throw new Error('missingRelevant')
-    // Verify user exists and if the user has answered this question before
+    
+    // Verify user exists (first promise) and if the user has answered this question before (second promise)
     const promises = [ UserModel.find(userId), UserQuestionModel.findMatch(userId, question.id), DailyQuestionModel.findByDate(date) ]
     Promise.all(promises)
     .then(results => {
       if (!results[0]) throw new Error('noSuchUser')
       // Determine correctness of provided answer
       const gotCorrect = answer == question.answer
+
       // First promise will add entry to users_daily_questions
       const promises = [ UserDailyQuestionModel.create({ user_id: userId, daily_question_id: results[2].id, got_correct: gotCorrect }) ]
       // Second promise will either update or create users_questions record
