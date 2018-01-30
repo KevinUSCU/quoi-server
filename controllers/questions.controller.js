@@ -1,5 +1,5 @@
 const Controller = require('./default.controller')('Question') //Question is the model name
-const { QuestionModel, UserQuestionModel, UserDailyQuestionModel, UserModel } = require('../models')
+const { DailyQuestionModel, QuestionModel, UserQuestionModel, UserDailyQuestionModel, UserModel } = require('../models')
 
 class QuestionsController extends Controller {
 
@@ -22,15 +22,31 @@ class QuestionsController extends Controller {
   static recordDailyQuestionAnswerForUser (req, res, next) {
     const userId = req.params.userId
     const { answer, considersRelevant } = req.body
+    const date = TASKRUNNER.date
     const question = TASKRUNNER.questionOfTheDay
     if (!Number(userId)) throw new Error(`noSuchRoute`) // Catch malformed routes
     if (!answer) throw new Error('missingAnswer')
-    if (!considersRelevant) throw new Error('missingRelevant')
-    const promises = [ UserModel.find(userId), UserQuestionModel.findMatch(userId, question.id) ]
+    if (typeof considersRelevant !== 'boolean') throw new Error('missingRelevant')
+    // Verify user exists and if the user has answered this question before
+    const promises = [ UserModel.find(userId), UserQuestionModel.findMatch(userId, question.id), DailyQuestionModel.findByDate(date) ]
     Promise.all(promises)
     .then(results => {
-
+      if (!results[0]) throw new Error('noSuchUser')
+      // Determine correctness of provided answer
+      const gotCorrect = answer == question.answer
+      // First promise will add entry to users_daily_questions
+      const promises = [ UserDailyQuestionModel.create({ user_id: userId, daily_question_id: results[2].id, got_correct: gotCorrect }) ]
+      // Second promise will either update or create users_questions record
+      if (results[1]) { // Update
+        let answerHistory = JSON.parse(results[1].answer_history)
+        answerHistory.push(gotCorrect)
+        promises.push(UserQuestionModel.update(results[1].id, { answer_history: JSON.stringify(answerHistory), considers_relevant: considersRelevant }))
+      } else { // Create
+        promise.push(UserQuestionModel.create({ user_id: userId, question_id: question.id, answer_history: JSON.stringify([gotCorrect]), considers_relevant: considersRelevant }))
+      }
+      Promise.all(promises)
     })
+    .then(() => res.status(201).json({ Answer: 'User answer recorded' }))
     .catch(next)
   }
 
