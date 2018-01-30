@@ -15,11 +15,12 @@ function processErrorMessage(err) {
       case 'missingLastname': return { status: 400, message: 'Last name is required' }
       case 'missingPassword': return { status: 400, message: 'A password is required' }
       case 'missingQuestion': return { status: 400, message: 'The question to be asked is required' }
+      case 'missingRelevant': return { status: 400, message: 'The relevance of the question is required' }
       case 'missingTip': return { status: 400, message: 'A tip is required' }
       case 'missingTitle': return { status: 400, message: 'A title is required for the article' }
       // case 'missingRole': return { status: 400, message: 'Role attribute is required'}
       // case 'noSuchItem': return { status: 404, message: 'This item does not exist' }
-      // case 'noSuchRoute': return { status: 404, message: 'This is not a valid route' }
+      case 'noSuchRoute': return { status: 404, message: 'This is not a valid route' }
       case 'noSuchInfopedia': return { status: 404, message: 'This infopedia article does not exist' }
       case 'noSuchQuestion': return { status: 404, message: 'This question does not exist' }
       case 'noSuchTip': return { status: 404, message: 'This tip does not exist' }

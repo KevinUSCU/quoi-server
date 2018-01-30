@@ -9,6 +9,7 @@ module.exports = name => {
     }
 
     static show (req, res, next) {
+      if (!Number(req.params.id)) throw new Error(`noSuchRoute`) // Catch malformed routes
       Model.find(req.params.id)
       .then(response => {
         if (!response) throw new Error(`noSuch${name}`)
@@ -25,6 +26,7 @@ module.exports = name => {
     }
 
     static update (req, res, next) {
+      if (!Number(req.params.id)) throw new Error(`noSuchRoute`) // Catch malformed routes
       const payload = req.fields ? payloadBuilder(req) : null
       Model.update(req.params.id, payload || req.body)
       .then(response => {
@@ -35,6 +37,7 @@ module.exports = name => {
     }
 
     static destroy (req, res, next) {
+      if (!Number(req.params.id)) throw new Error(`noSuchRoute`) // Catch malformed routes
       Model.destroy(req.params.id)
       .then(response => res.status(204).json()) //no response body with 204
       .catch(next)
