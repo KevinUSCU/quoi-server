@@ -3,6 +3,24 @@ const { InfopediaModel, QuestionModel } = require('../models')
 
 class InfopediaController extends Controller {
 
+  static groupedByCategory (req, res, next) {
+    InfopediaModel.all()
+      .then(response => {
+        const grouped = {}
+        response.forEach(item => {
+          const newItem = {
+            title: item.title,
+            description: item.description
+          }
+          if (!grouped[item.category]) grouped[item.category] = []
+          grouped[item.category].push(newItem)
+        })
+        return grouped
+      })
+      .then(response => res.status(200).json({ ['Infopedias']: response }))
+      .catch(next)
+  }
+
   static create (req, res, next) {
     req.fields = {
       required: ['category', 'title', 'description'],
