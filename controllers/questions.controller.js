@@ -1,5 +1,5 @@
 const Controller = require('./default.controller')('Question') //Question is the model name
-const { QuestionModel } = require('../models')
+const { QuestionModel, UserQuestionModel, UserDailyQuestionModel, UserModel } = require('../models')
 
 class QuestionsController extends Controller {
 
@@ -19,6 +19,21 @@ class QuestionsController extends Controller {
     .catch(next)
   }
 
+  static recordDailyQuestionAnswerForUser (req, res, next) {
+    const userId = req.params.userId
+    const { answer, considersRelevant } = req.body
+    const question = TASKRUNNER.questionOfTheDay
+    if (!Number(userId)) throw new Error(`noSuchRoute`) // Catch malformed routes
+    if (!answer) throw new Error('missingAnswer')
+    if (!considersRelevant) throw new Error('missingRelevant')
+    const promises = [ UserModel.find(userId), UserQuestionModel.findMatch(userId, question.id) ]
+    Promise.all(promises)
+    .then(results => {
+
+    })
+    .catch(next)
+  }
+
   static create (req, res, next) {
     req.fields = {
       required: ['question', 'choices', 'answer' ],
@@ -30,9 +45,8 @@ class QuestionsController extends Controller {
   static update (req, res, next) {
     req.fields = {
       required: [],
-      optional: [ 'question', 'choices', 'answer', 'explanation', 'infopedia_id', 'image_url', 'edited' ]
+      optional: [ 'explanation', 'infopedia_id', 'image_url' ]
     }
-    req.body.edited = true //mark as edited
     super.update(req, res, next)
   }
 
