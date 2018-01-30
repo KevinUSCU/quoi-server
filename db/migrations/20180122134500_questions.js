@@ -8,7 +8,6 @@ exports.up = function(knex, Promise) {
     table.integer('infopedia_id').defaultTo(null)
     table.string('image_url').defaultTo(null)
     table.boolean('used').notNullable().defaultTo(false)
-    table.boolean('edited').notNullable().defaultTo(false)
     table.boolean('deleted').notNullable().defaultTo(false)
     table.timestamps(true, true)
   })

@@ -29,8 +29,8 @@ class TaskrunnerModel {
       Promise.all(promises)
       .then(results => {
         this.tipOfTheDay = results[0]
-        const { id, question, choices, answer, explanation, infopedia_id, image_url, edited, deleted } = results[1]
-        this.questionOfTheDay = { id, question, choices, answer, explanation, infopedia_id, image_url, edited, deleted }
+        const { id, question, choices, answer, explanation, infopedia_id, image_url, deleted } = results[1]
+        this.questionOfTheDay = { id, question, choices, answer, explanation, infopedia_id, image_url, deleted }
         fs.writeFileSync(this.stateFile, JSON.stringify({ date: this.date, tipOfTheDay: this.tipOfTheDay, questionOfTheDay: this.questionOfTheDay }))
       })
     }

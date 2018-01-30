@@ -6,14 +6,14 @@ class QuestionModel extends Model {
 
   static allDailyQuestions() {
     return db('daily_questions')
-    .select('question_id as id', 'date', 'question', 'choices', 'answer', 'explanation', 'infopedia_id', 'image_url', 'edited', 'deleted')
+    .select('question_id as id', 'date', 'question', 'choices', 'answer', 'explanation', 'infopedia_id', 'image_url', 'deleted')
     .join('questions', 'question_id', 'questions.id')
   }
 
   static allDailyQuestionsForUser(userId) {
     return db('users_daily_questions')
     .where({ user_id: userId })
-    .select('question_id as id', 'date', 'question', 'choices', 'answer', 'explanation', 'infopedia_id', 'image_url', 'edited', 'deleted', 'got_correct')
+    .select('question_id as id', 'date', 'question', 'choices', 'answer', 'explanation', 'infopedia_id', 'image_url', 'deleted', 'got_correct')
     .join('daily_questions', 'daily_question_id', 'daily_questions.id')
     .join('questions', 'question_id', 'questions.id')
   }
