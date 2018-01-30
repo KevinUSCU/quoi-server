@@ -1,5 +1,6 @@
 const Model = require('./default.model')('questions') //questions is the table name
 const db = require('../db/knex')
+const DailyQuestionModel = require('./daily-question.model')
 
 class QuestionModel extends Model {
 
@@ -29,9 +30,8 @@ class QuestionModel extends Model {
       const question = questions[randomIndex]
       super.update(question.id, { used: true })
       // Add question to list of daily questions
-      return db('daily_questions')
-      .insert({ date, question_id: question.id })
-      .then(() => question)
+      DailyQuestionModel.create({ date, question_id: question.id })
+      return question
     })
   }
 
