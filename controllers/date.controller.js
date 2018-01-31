@@ -1,7 +1,10 @@
+const moment = require('moment')
+
 class DateController {
 
-  static getServerDate (req, res, next) {
-    res.status(200).json({ Date: TASKRUNNER.date })
+  static getServerDayOfTheWeek (req, res, next) {
+    const day = moment(TASKRUNNER.date).day()
+    res.status(200).json({ Day: day })
   }
 
 }

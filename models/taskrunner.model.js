@@ -1,4 +1,5 @@
 const fs = require('fs')
+const moment = require('moment');
 const { QuestionModel, TipModel } = require('./')
 
 class TaskrunnerModel {
@@ -21,11 +22,11 @@ class TaskrunnerModel {
   }
 
   _update() {
-    const currentDate = new Date().toISOString().substr(0,10) // Get current date in format 2018-01-25
+    const currentDate = moment().format('YYYYMMDD') // this will allow for a comparison in server local time
     if (currentDate > this.date) { // Generate new daily data
       console.log('Server has updated itself with new daily data.')
       this.date = currentDate
-      const promises = [ TipModel.randomNewTipOfTheDay(), QuestionModel.randomNewQuestionOfTheDay(currentDate) ]
+      const promises = [ TipModel.randomNewTipOfTheDay(), QuestionModel.randomNewQuestionOfTheDay(moment().toJSON()) ]
       Promise.all(promises)
       .then(results => {
         this.tipOfTheDay = results[0]
