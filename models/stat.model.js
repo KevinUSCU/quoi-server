@@ -7,8 +7,10 @@ class StatModel {
   static getDashboardStatusForUser(userId) {
     return UserDailyQuestionModel.getAllDailyQuestionsForUser(userId)
     .then(questions => {
-      // We build an array to hand back to the client. The client views status for the current Sun - Sat week.
-      let statusMap = []
+      // We build an object to hand back to the client. The client views status for the current Sun - Sat week.
+      const statusMap = []
+      var todayCompleted = false
+      const day = moment(TASKRUNNER.date).day()
       for (let i = 0; i < 7; i++) {
         let date = moment().day(i) // Generates the date for the day of the week provided by i
         let filtered = questions.filter(question => { // Look for daily questions answered on day i
@@ -16,9 +18,15 @@ class StatModel {
         })
         let status = null
         if (filtered[0]) status = filtered[0].got_correct
-        statusMap.push({ day: date.date(), status })
+        let today = false
+        if (day === i) {
+          today = true
+          if (status !== null) todayCompleted = true
+        }
+        statusMap.push({ day: date.date(), status, today })
       }
-      return statusMap
+      const dashboardObject = { map: statusMap, todayCompleted }
+      return dashboardObject
     })
   }
 
