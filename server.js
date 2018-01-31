@@ -26,6 +26,7 @@ const {
   DateRouter,
   InfopediaRouter,
   QuestionsRouter,
+  StatsRouter,
   TipsRouter,
   UsersRouter
 } = require('./routes')
@@ -33,6 +34,7 @@ app.use('/api/auth', AuthRouter)
 app.use('/api/date', DateRouter)
 app.use('/api/infopedia', InfopediaRouter)
 app.use('/api/questions', QuestionsRouter)
+app.use('/api/stats', StatsRouter)
 app.use('/api/tips', TipsRouter)
 app.use('/api/users', UsersRouter)
 

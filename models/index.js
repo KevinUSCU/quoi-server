@@ -3,6 +3,7 @@ module.exports = {
   DailyQuestionModel: require('./daily-question.model'),
   InfopediaModel: require('./infopedia.model'),
   QuestionModel: require('./question.model'),
+  StatModel: require('./stat.model'),
   TipModel: require('./tip.model'),
   TokenModel: require('./token.model'),
   UserModel: require('./user.model'),
