@@ -30,7 +30,7 @@ class QuestionsController extends Controller {
     if (!answer) throw new Error('missingAnswer')
     if (typeof considersRelevant !== 'boolean') throw new Error('missingRelevant')
     
-    // Verify user exists (first promise) and if the user has answered this question before (second promise)
+    // Verify user exists (first promise), if the user has answered this question before (second promise), and get the id of the current daily question (third promise)
     const promises = [ UserModel.find(userId), UserQuestionModel.findMatch(userId, question.id), DailyQuestionModel.findByDate(date) ]
     Promise.all(promises)
     .then(results => {
@@ -46,7 +46,7 @@ class QuestionsController extends Controller {
         answerHistory.push(gotCorrect)
         promises.push(UserQuestionModel.update(results[1].id, { answer_history: JSON.stringify(answerHistory), considers_relevant: considersRelevant }))
       } else { // Create
-        promise.push(UserQuestionModel.create({ user_id: userId, question_id: question.id, answer_history: JSON.stringify([gotCorrect]), considers_relevant: considersRelevant }))
+        promises.push(UserQuestionModel.create({ user_id: userId, question_id: question.id, answer_history: JSON.stringify([gotCorrect]), considers_relevant: considersRelevant }))
       }
       Promise.all(promises)
     })
