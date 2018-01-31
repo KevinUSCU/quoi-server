@@ -27,7 +27,7 @@ class QuestionsController extends Controller {
     const question = TASKRUNNER.questionOfTheDay
     
     if (!Number(userId)) throw new Error(`noSuchRoute`) // Catch malformed routes
-    if (!answer) throw new Error('missingAnswer')
+    if (typeof answer !== 'number') throw new Error('missingAnswer')
     if (typeof considersRelevant !== 'boolean') throw new Error('missingRelevant')
     
     // Verify user exists (first promise), if the user has answered this question before (second promise), and get the id of the current daily question (third promise)
