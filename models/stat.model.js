@@ -31,7 +31,7 @@ class StatModel {
     })
   }
 
-  static getDailyQuestionSuccessRate(userID) {
+  static getDailyQuestionSuccessRate(userId) {
     return UserDailyQuestionModel.getAllDailyQuestionsForUser(userId)
     .then(questions => {
       let correct = 0
@@ -43,8 +43,7 @@ class StatModel {
       return { 
         total: correct + incorrect,
         correct,
-        incorrect,
-        percent: correct/total
+        incorrect
       }
     })
   }
