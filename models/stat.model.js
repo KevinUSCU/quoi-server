@@ -10,11 +10,12 @@ class StatModel {
       // We build an object to hand back to the client. The client views status for the current Sun - Sat week.
       const statusMap = []
       var todayCompleted = false
-      const day = moment(TASKRUNNER.date).day()
+      const day = moment(TASKRUNNER.date).utcOffset("-08:00").day()
+      console.log(day)
       for (let i = 0; i < 7; i++) {
-        let date = moment().day(i) // Generates the date for the day of the week provided by i
+        let date = moment().utcOffset("-08:00").day(i) // Generates the date for the day of the week provided by i
         let filtered = questions.filter(question => { // Look for daily questions answered on day i
-          return date.format('YYYYMMDD') === moment(question.date).format('YYYYMMDD')
+          return date.format('YYYYMMDD') === moment(question.date).utcOffset("-08:00").format('YYYYMMDD')
         })
         let status = null
         if (filtered[0]) status = filtered[0].got_correct
