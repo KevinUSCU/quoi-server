@@ -10,6 +10,13 @@ class StatsController {
     .catch(next)
   }
 
+  static dailyQuestionSuccessRateForUser (req, res, next) {
+    if (!Number(req.params.userId)) throw new Error('noSuchRoute') // Catch malformed routes
+    StatModel.getDailyQuestionSuccessRate(req.params.userId)
+    .then(response => res.status(200).json({ Stats: response }))
+    .catch(next)
+  }
+
 }
 
 module.exports = StatsController

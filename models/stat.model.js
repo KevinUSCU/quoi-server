@@ -31,6 +31,24 @@ class StatModel {
     })
   }
 
+  static getDailyQuestionSuccessRate(userID) {
+    return UserDailyQuestionModel.getAllDailyQuestionsForUser(userId)
+    .then(questions => {
+      let correct = 0
+      let incorrect = 0
+      questions.forEach(question => {
+        if (question.got_correct === true) correct++
+        else incorrect++
+      })
+      return { 
+        total: correct + incorrect,
+        correct,
+        incorrect,
+        percent: correct/total
+      }
+    })
+  }
+
 }
 
 module.exports = StatModel
