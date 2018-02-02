@@ -19,14 +19,13 @@ function processErrorMessage(err) {
       case 'missingTip': return { status: 400, message: 'A tip is required' }
       case 'missingTitle': return { status: 400, message: 'A title is required for the article' }
       case 'missingRole': return { status: 400, message: 'Role attribute is required'}
-      // case 'noSuchItem': return { status: 404, message: 'This item does not exist' }
       case 'noSuchRoute': return { status: 404, message: 'This is not a valid route' }
       case 'noSuchInfopedia': return { status: 404, message: 'This infopedia article does not exist' }
       case 'noSuchQuestion': return { status: 404, message: 'This question does not exist' }
       case 'noSuchTip': return { status: 404, message: 'This tip does not exist' }
       case 'noSuchUser': return { status: 404, message: 'This user does not exist' }
-      // case 'requestorInvalid': return { status: 401, message: 'Requestor is not a valid user' }
-      // case 'unauthorizedUser': return { status: 401, message: 'User is not authorized to access this resource' }
+      case 'requestorInvalid': return { status: 401, message: 'Requestor is not a valid user' }
+      case 'unauthorizedUser': return { status: 401, message: 'User is not authorized to access this resource' }
       default:
         console.log(err)
         return { status: 500, message: 'Our apologies, but an internal server error has occurred' }

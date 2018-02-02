@@ -1,15 +1,15 @@
 const express = require('express')
 const router = express.Router()
-const { InfopediaController } = require(`../controllers`)
+const { AuthController, InfopediaController } = require(`../controllers`)
 
 router.get('/groupedbycategory', InfopediaController.groupedByCategory)
 router.get('/', InfopediaController.index)
 router.get('/:id', InfopediaController.show)
 
-router.post('/', InfopediaController.create) //needs auth
+router.post('/', AuthController.isAdmin, InfopediaController.create)
 
-router.put('/:id', InfopediaController.update) //needs auth
+router.put('/:id', AuthController.isAdmin, InfopediaController.update)
 
-router.delete('/:id', InfopediaController.destroy) //needs auth
+router.delete('/:id', AuthController.isAdmin, InfopediaController.destroy)
 
 module.exports = router

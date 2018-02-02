@@ -63,19 +63,64 @@ class AuthController extends Controller {
   }
 
   static isAdmin (req, res, next) {
-
+    // Validate and decode token
+    TokenModel.verifyAndExtractHeaderToken(req.headers)
+    .catch(err => { throw new Error('invalidToken') })
+    // Check for and retrieve user from database
+    .then(token => UserModel.find(token.sub.id))
+    // Verify user
+    .then(user => {
+      if (!user) throw new Error('requestorInvalid')
+      if (user.role !== 'admin') throw new Error('unauthorizedUser')
+      next() // pass auth check
+    })
+    .catch(next) // fail auth check
   }
 
   static isUser (req, res, next) {
-
+    // Validate and decode token
+    TokenModel.verifyAndExtractHeaderToken(req.headers)
+    .catch(err => { throw new Error('invalidToken') })
+    // Check for and retrieve user from database
+    .then(token => UserModel.find(token.sub.id))
+    // Verify user
+    .then(user => {
+      if (!user) throw new Error('requestorInvalid')
+      next() // pass auth check
+    })
+    .catch(next) // fail auth check
   }
 
-  static matchesUser (req, res, next) {
-
+  static matchesThisUser (req, res, next) {
+    // Validate and decode token
+    TokenModel.verifyAndExtractHeaderToken(req.headers)
+    .catch(err => { throw new Error('invalidToken') })
+    // Check for and retrieve user from database
+    .then(token => UserModel.find(token.sub.id))
+    // Verify user against userId from request
+    .then(user => {
+      const requestedUser = req.params.userId
+      if (!user) throw new Error('requestorInvalid')
+      if (user.id != requestedUser) throw new Error('unauthorizedUser')
+      next() // pass auth check
+    })
+    .catch(next) // fail auth check
   }
 
-  static matchesUserOrAdmin (req, res, next) {
-
+  static matchesThisUserOrAdmin (req, res, next) {
+    // Validate and decode token
+    TokenModel.verifyAndExtractHeaderToken(req.headers)
+    .catch(err => { throw new Error('invalidToken') })
+    // Check for and retrieve user from database
+    .then(token => UserModel.find(token.sub.id))
+    // Verify user against userId from request
+    .then(user => {
+      const requestedUser = req.params.userId
+      if (!user) throw new Error('requestorInvalid')
+      if (!(user.id == requestedUser || user.role === 'admin')) throw new Error('unauthorizedUser')
+      next() // pass auth check
+    })
+    .catch(next) // fail auth check
   }
 
 }

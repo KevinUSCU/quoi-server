@@ -17,7 +17,15 @@ class UsersController extends Controller {
     .catch(next)
   }
 
+  static show (req, res, next) {
+    // Transfer userId param to id
+    req.params.id = req.params.userId
+    super.show(req, res, next)
+  }
+
   static update (req, res, next) {
+    // Transfer userId param to id
+    req.params.id = req.params.userId
     // Update role of user in db
     req.fields = {
       required: [],
@@ -28,6 +36,8 @@ class UsersController extends Controller {
 
   static changeRole (req, res, next) {
     if (!(req.body.role === 'admin' || req.body.role === 'user')) throw new Error('incorrectRoleType')
+    // Transfer userId param to id
+    req.params.id = req.params.userId
     // Update role of user in db
     req.fields = {
       required: ['role'],
@@ -37,7 +47,9 @@ class UsersController extends Controller {
   }
 
   static destroy (req, res, next) {
-    if (!Number(req.params.id)) throw new Error(`noSuchRoute`) // Catch malformed routes
+    if (!Number(req.params.userId)) throw new Error(`noSuchRoute`) // Catch malformed routes
+    // Transfer userId param to id
+    req.params.id = req.params.userId
     // Admin accounts cannot be deleted
     const id = req.params.id
     UserModel.find(id)

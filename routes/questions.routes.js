@@ -1,19 +1,19 @@
 const express = require('express')
 const router = express.Router()
-const { QuestionsController } = require(`../controllers`)
+const { AuthController, QuestionsController } = require(`../controllers`)
 
 router.get('/questionoftheday', QuestionsController.questionOfTheDay)
-router.get('/dailyquestions', QuestionsController.dailyQuestionsIndex)
-router.get('/dailyquestions/:userId', QuestionsController.dailyQuestionsForUser)
+router.get('/dailyquestions', AuthController.isAdmin, QuestionsController.dailyQuestionsIndex)
+router.get('/dailyquestions/:userId', AuthController.matchesThisUserOrAdmin, QuestionsController.dailyQuestionsForUser)
 router.get('/', QuestionsController.index)
 router.get('/:id', QuestionsController.show)
 
-router.post('/dailyquestionanswer/:userId', QuestionsController.recordDailyQuestionAnswerForUser)
-router.post('/', QuestionsController.create) //needs auth
+router.post('/dailyquestionanswer/:userId', AuthController.matchesThisUser, QuestionsController.recordDailyQuestionAnswerForUser)
+router.post('/', AuthController.isAdmin, QuestionsController.create)
 
 // Only explanation, infopedia_id, and image_url can be edited for a question.
-router.put('/:id', QuestionsController.update) //needs auth
+router.put('/:id', AuthController.isAdmin, QuestionsController.update)
 
-router.delete('/:id', QuestionsController.destroy) //needs auth
+router.delete('/:id', AuthController.isAdmin, QuestionsController.destroy)
 
 module.exports = router

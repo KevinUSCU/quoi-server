@@ -1,8 +1,8 @@
 const express = require('express')
 const router = express.Router()
-const { StatsController } = require(`../controllers`)
+const { AuthController, StatsController } = require(`../controllers`)
 
-router.get('/dashboardstatus/:userId', StatsController.dashboardStatusForUser)
-router.get('/dailyquestionsuccessrate/:userId', StatsController.dailyQuestionSuccessRateForUser)
+router.get('/dashboardstatus/:userId', AuthController.matchesThisUserOrAdmin, StatsController.dashboardStatusForUser)
+router.get('/dailyquestionsuccessrate/:userId', AuthController.matchesThisUserOrAdmin, StatsController.dailyQuestionSuccessRateForUser)
 
 module.exports = router

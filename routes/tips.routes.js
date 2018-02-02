@@ -1,15 +1,15 @@
 const express = require('express')
 const router = express.Router()
-const { TipsController } = require(`../controllers`)
+const { AuthController, TipsController } = require(`../controllers`)
 
 router.get('/tipoftheday', TipsController.tipOfTheDay)
 router.get('/', TipsController.index)
 router.get('/:id', TipsController.show)
 
-router.post('/', TipsController.create) //needs auth
+router.post('/', AuthController.isAdmin, TipsController.create)
 
-router.put('/:id', TipsController.update) //needs auth
+router.put('/:id', AuthController.isAdmin, TipsController.update)
 
-router.delete('/:id', TipsController.destroy) //needs auth
+router.delete('/:id', AuthController.isAdmin, TipsController.destroy)
 
 module.exports = router
