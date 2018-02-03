@@ -50,7 +50,7 @@ app.use((err, _req, res, _next) => {
   //parse error message
   err = processErrorMessage(err)
   //errors dispatched to client are also displayed on server console if following env variable is 'true'
-  if (process.env.PRINT_CLIENT_ERRORS_ON_SERVER) console.error('Error dispatched to client:', err)
+  if (environment !== 'test' && process.env.PRINT_CLIENT_ERRORS_ON_SERVER) console.error('Error dispatched to client:', err)
   //dispatch error to client
   const status = err.status || 500;
   const message = err.message || 'Something went wrong!'

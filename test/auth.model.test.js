@@ -19,6 +19,9 @@ describe('Auth Model', () => {
 
   afterAll(() => {
     return db.destroy()
+    .catch(err => {
+      throw new Error(err)
+    })
   })
 
   describe('View all', () => {

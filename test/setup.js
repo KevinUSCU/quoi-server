@@ -12,6 +12,8 @@ module.exports = () => {
   return db.raw(`DROP DATABASE IF EXISTS ${dbName};`)
   .then(result => db.raw(`CREATE DATABASE ${dbName};`))
   .then(result => db.destroy())
-  .catch((err) => console.error)
+  .catch((err) => {
+    throw new Error(err)
+  })
 
 }
