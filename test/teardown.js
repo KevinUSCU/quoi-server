@@ -13,7 +13,7 @@ module.exports = () => {
     return db.raw(`DROP DATABASE IF EXISTS ${dbName};`)
     .then(result => db.destroy())
     .catch((err) => {
-      throw new Error(err)
+      console.error(err)
     })
   }
 }

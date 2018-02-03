@@ -6,26 +6,26 @@ describe('Daily Question Model', () => {
   beforeAll(() => {
     return db.migrate.latest()
     .catch(err => {
-      throw new Error(err)
+      console.error(err)
     })
   })
 
   beforeEach(() => {
     return db.seed.run()
     .catch(err => {
-      throw new Error(err)
+      console.error(err)
     })
   })
 
   afterAll(() => {
     return db.destroy()
     .catch(err => {
-      throw new Error(err)
+      console.error(err)
     })
   })
 
   describe('Find (by date)', () => {
-    xtest('It should return the daily question for an existing date', () => {
+    test('It should return the daily question for an existing date', () => {
       const dataEntry = { date: '2000-01-01T05:15:50.118Z', question_id: 1 }
       return model.create(dataEntry)
       .then(() => {

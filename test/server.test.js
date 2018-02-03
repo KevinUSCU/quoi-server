@@ -5,7 +5,7 @@ const db = require('../db/knex.js') // Use this to close database at end of test
 afterAll(() => {
   return db.destroy()
   .catch(err => {
-    throw new Error(err)
+    console.error(err)
   })
 })
 

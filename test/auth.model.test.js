@@ -6,21 +6,21 @@ describe('Auth Model', () => {
   beforeAll(() => {
     return db.migrate.latest()
     .catch(err => {
-      throw new Error(err)
+      console.error(err)
     })
   })
 
   beforeEach(() => {
     return db.seed.run()
     .catch(err => {
-      throw new Error(err)
+      console.error(err)
     })
   })
 
   afterAll(() => {
     return db.destroy()
     .catch(err => {
-      throw new Error(err)
+      console.error(err)
     })
   })
 
