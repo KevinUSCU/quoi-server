@@ -25,7 +25,7 @@ describe('Daily Question Model', () => {
   })
 
   describe('Find (by date)', () => {
-    test('It should return the daily question for an existing date', () => {
+    xtest('It should return the daily question for an existing date', () => {
       const dataEntry = { date: '2000-01-01T05:15:50.118Z', question_id: 1 }
       return model.create(dataEntry)
       .then(() => {
