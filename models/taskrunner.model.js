@@ -23,8 +23,8 @@ class TaskrunnerModel {
 
   _update() {
     const currentDate = moment().utcOffset("-08:00").toJSON()
-    // Compare previous date to current date in local server time, using only the date portion 
-    if (moment(currentDate).utcOffset("-08:00").format('YYYYMMDD') > moment(this.date).utcOffset("-08:00").format('YYYYMMDD')) { // If true, generate new daily data
+    // Compare previous date to current date in local server time, using only the date portion; if true, generate new daily data
+    if (moment(currentDate).utcOffset("-08:00").format('YYYYMMDD') > moment(this.date).utcOffset("-08:00").format('YYYYMMDD')) {
       console.log('Server has updated itself with new daily data.')
       this.date = currentDate
       const promises = [ TipModel.randomNewTipOfTheDay(), QuestionModel.randomNewQuestionOfTheDay(currentDate) ]
