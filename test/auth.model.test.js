@@ -26,7 +26,7 @@ describe('Auth Model', () => {
 
   describe('View all', () => {
     test('It should throw an error if .all() method is called', () => {
-      expect(() => model.all()).toThrow()
+      return expect(() => model.all()).toThrow()
     })
   })
 
@@ -63,7 +63,7 @@ describe('Auth Model', () => {
 
   describe('Destroy', () => {
     test('It should throw an error if .destroy() method is called', () => {
-      expect(() => model.destroy(1)).toThrow()
+      return expect(() => model.destroy(1)).toThrow()
     })
   })
 
