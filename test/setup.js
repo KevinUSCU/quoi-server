@@ -1,6 +1,7 @@
 //Recreate test database before tests
 
 module.exports = () => {
+  console.log(process.env)
   const connection = require('knex')
   const dbName = 'quoi_test'
 
