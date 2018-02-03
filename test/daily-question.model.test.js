@@ -11,7 +11,7 @@ describe('Daily Question Model', () => {
   })
 
   beforeEach(() => {
-    return db.seed.run()
+    return db.seed.run({ directory: './db/seeds_test' })
     .catch(err => {
       console.error(err)
     })
