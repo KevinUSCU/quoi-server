@@ -1,22 +1,22 @@
 const model = require('../models/daily-question.model')
 const db = require('../db/knex')
 
+beforeAll(() => {
+  return db.migrate.latest()
+  .catch(err => console.error(err))
+})
+
+beforeEach(() => {
+  return db.seed.run()
+  .catch(err => console.error(err))
+})
+
+afterAll(() => {
+  return db.destroy()
+  .catch(err => console.error(err))
+})
+
 describe('Daily Question Model', () => {
-
-  beforeAll(() => {
-    return db.migrate.latest()
-    .catch(err => console.error(err))
-  })
-
-  beforeEach(() => {
-    return db.seed.run()
-    .catch(err => console.error(err))
-  })
-
-  afterAll(() => {
-    return db.destroy()
-    .catch(err => console.error(err))
-  })
 
   describe('Find (by date)', () => {
     test('It should return the daily question for an existing date', () => {
