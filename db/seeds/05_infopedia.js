@@ -17,7 +17,7 @@ exports.seed = function(knex, Promise) {
       category: 'Arrays',
       title: 'Array',
       description: 'An array is a global object in JavaScript which contains values ordered by an index number starting at 0.',
-    },
+    }
     
   ])
   .then(() => {
