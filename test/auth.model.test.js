@@ -3,26 +3,47 @@ const db = require('../db/knex')
 
 describe('Auth Model', () => {
 
-  beforeAll(() => {
-    return db.migrate.latest()
-    .catch(err => {
-      console.error(err)
-    })
-  })
+  // beforeAll(() => {
+  //   return db.migrate.latest()
+  //   .catch(err => {
+  //     console.error(err)
+  //   })
+  // })
 
   beforeEach(() => {
-    return db.seed.run()
+    return db.migrate.latest()
+    .then(() => db.seed.run())
     .catch(err => {
       console.error(err)
     })
   })
 
-  afterAll(() => {
+  afterEach(() => {
     return db.destroy()
     .catch(err => {
       console.error(err)
     })
   })
+  // beforeAll(() => {
+  //   return db.migrate.latest()
+  //   .catch(err => {
+  //     console.error(err)
+  //   })
+  // })
+
+  // beforeEach(() => {
+  //   return db.seed.run()
+  //   .catch(err => {
+  //     console.error(err)
+  //   })
+  // })
+
+  // afterAll(() => {
+  //   return db.destroy()
+  //   .catch(err => {
+  //     console.error(err)
+  //   })
+  // })
 
   describe('View all', () => {
     test('It should throw an error if .all() method is called', () => {
