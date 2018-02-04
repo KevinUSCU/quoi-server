@@ -8,21 +8,21 @@ describe('Auth Model', () => {
     .catch(err => {
       console.error(err)
     })
-  })
+  }, 10000)
 
   beforeEach(() => {
     return db.seed.run()
     .catch(err => {
       console.error(err)
     })
-  })
+  }, 10000)
 
   afterAll(() => {
     return db.destroy()
     .catch(err => {
       console.error(err)
     })
-  })
+  }, 10000)
 
   describe('View all', () => {
     test('It should throw an error if .all() method is called', () => {

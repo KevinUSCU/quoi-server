@@ -8,21 +8,21 @@ describe('Daily Question Model', () => {
     .catch(err => {
       console.error(err)
     })
-  })
+  }, 10000)
 
   beforeEach(() => {
     return db.seed.run()
     .catch(err => {
       console.error(err)
     })
-  })
+  }, 10000)
 
   afterAll(() => {
     return db.destroy()
     .catch(err => {
       console.error(err)
     })
-  })
+  }, 10000)
 
   describe('Find (by date)', () => {
     test('It should return the daily question for an existing date', () => {
