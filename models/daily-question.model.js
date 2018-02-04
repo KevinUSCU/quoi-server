@@ -9,6 +9,14 @@ class DailyQuestionModel extends Model {
     .first() // There should only be one entry for each date
   }
 
+  static getQuestionWithNewestDate() {
+    return db('daily_questions')
+    .select('question_id as id', 'date', 'question', 'choices', 'answer', 'explanation', 'infopedia_id', 'image_url', 'used', 'deleted')
+    .where({ date: db('daily_questions').max('date') })
+    .join('questions', 'question_id', 'questions.id')
+    .first()
+  }
+
 }
 
 module.exports = DailyQuestionModel
