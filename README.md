@@ -26,11 +26,11 @@ When a token is required for a route, it follows the following format:
 * Example: { authorization: 'Bearer eyJhbGciOiJIUz.I1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiO' }  
   (please note this is not an actual token)
 ### Logins
-####Signup
+#### Signup
 Requires: a body with { email, password, firstname, lastname }  
 Returns: the user's token in a key/value object { Auth: token }
 
-####Login  
+#### Login  
 Requires: a body with { email, password }  
 Returns: that user's token in a key/value object { Auth: token }
 
