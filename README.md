@@ -26,24 +26,16 @@ When a token is required for a route, it follows the following format:
 * Example: { authorization: 'Bearer eyJhbGciOiJIUz.I1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiO' }  
   (please note this is not an actual token)
 ### Logins
-* Signup
-  
-Requires: a body with { email, password, firstname, lastname }
-  
+####Signup
+Requires: a body with { email, password, firstname, lastname }  
 Returns: the user's token in a key/value object { Auth: token }
-  
-  
-* Login
-  
-Requires: a body with { email, password }
-  
+
+####Login  
+Requires: a body with { email, password }  
 Returns: that user's token in a key/value object { Auth: token }
-  
-  
-* Update
-  
-Requires: a valid token from the user, body with either/both { email, password }
-  
+
+#### Update  
+Requires: a valid token from the user, body with either/both { email, password }  
 Returns: the user id on success
 
 ### Route Protection:
