@@ -5,7 +5,6 @@ describe('Auth Model', () => {
 
   beforeAll(() => {
     return db.migrate.latest()
-    .then()
     .catch(err => {
       console.error(err)
     })
@@ -13,7 +12,6 @@ describe('Auth Model', () => {
 
   beforeEach(() => {
     return db.seed.run()
-    .then()
     .catch(err => {
       console.error(err)
     })
@@ -21,7 +19,6 @@ describe('Auth Model', () => {
 
   afterAll(() => {
     return db.destroy()
-    .then()
     .catch(err => {
       console.error(err)
     })

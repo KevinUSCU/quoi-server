@@ -5,7 +5,6 @@ describe('Daily Question Model', () => {
 
   beforeAll(() => {
     return db.migrate.latest()
-    .then()
     .catch(err => {
       console.error(err)
     })
@@ -13,7 +12,6 @@ describe('Daily Question Model', () => {
 
   beforeEach(() => {
     return db.seed.run()
-    .then()
     .catch(err => {
       console.error(err)
     })
@@ -21,7 +19,6 @@ describe('Daily Question Model', () => {
 
   afterAll(() => {
     return db.destroy()
-    .then()
     .catch(err => {
       console.error(err)
     })
