@@ -3,7 +3,7 @@ exports.up = function(knex, Promise) {
     table.increments()
     table.string('category').notNullable().defaultTo('general')
     table.string('title').notNullable().defaultTo('')
-    table.string('description').notNullable().defaultTo('')
+    table.text('description').notNullable().defaultTo('')
     table.timestamps(true, true)
   })
 }
