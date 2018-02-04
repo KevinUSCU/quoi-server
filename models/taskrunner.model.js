@@ -1,6 +1,6 @@
 const fs = require('fs')
 const moment = require('moment');
-const { QuestionModel, TipModel } = require('./')
+const { DailyQuestionModel, QuestionModel, TipModel } = require('./')
 
 class TaskrunnerModel {
 
@@ -14,11 +14,24 @@ class TaskrunnerModel {
   }
 
   start() {
+    this._firstRun()
     this.taskTimer = setInterval(() => this._update(), 2000)
   }
 
   stop() {
     clearInterval(this.taskTimer)
+  }
+
+  _firstRun() {
+    // Check for instance where reseeding has occurred and saved state is out of sync with database
+    // If we are in sync, there should be a match for this.date in the daily_question table
+    DailyQuestionModel.findByDate(moment(this.date).toJSON())
+    .then(dailyQuestion => {
+      if (!dailyQuestion) { // Out of sync; force update by rewinding day such that next update will refresh
+        this.date = moment().subtract(2, 'days').utcOffset("-08:00").toJSON()
+      }
+      return
+    })
   }
 
   _update() {
