@@ -14,9 +14,10 @@
 2. npm run knex migrate:latest
 3. npm run knex seed:run
 4. npm run dev
+#### A Note On Reseeding
+You must restart the server after reseeding the database. This means that if it is running on a service like Heroku, you must invoke this manually after seeding by using the command 'heroku restart'.
 ### Testing
 (db is created and removed automatically by tests)
-  
 1. npm test
 
 ## Notes on Authentication
