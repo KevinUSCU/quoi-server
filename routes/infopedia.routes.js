@@ -3,6 +3,7 @@ const router = express.Router()
 const { AuthController, InfopediaController } = require(`../controllers`)
 
 router.get('/groupedbycategory', InfopediaController.groupedByCategory)
+router.get('/orderedbycategory', InfopediaController.orderedByCategory)
 router.get('/', InfopediaController.index)
 router.get('/:id', InfopediaController.show)
 

@@ -21,6 +21,12 @@ class InfopediaController extends Controller {
       .catch(next)
   }
 
+  static orderedByCategory (req, res, next) {
+    InfopediaModel.allOrderedByCategory()
+    .then(response => res.status(200).json({ [`Infopedias`]: response }))
+    .catch(next)
+  }
+
   static create (req, res, next) {
     req.fields = {
       required: ['category', 'title', 'description'],
