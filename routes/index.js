@@ -1,6 +1,5 @@
 module.exports = {
   AuthRouter: require('./auth.routes'),
-  DateRouter: require('./date.routes'),
   InfopediaRouter: require('./infopedia.routes'),
   QuestionsRouter: require('./questions.routes'),
   StatsRouter: require('./stats.routes'),
