@@ -18,14 +18,13 @@
 (db is created and removed automatically by tests)
 3. npm test
 
-### Tokens
+### Notes on Authentication
+#### Tokens
 When a token is required for a route, it follows the following format:
 * Requires a header with 'authorization' key with a string value that is 'Bearer ' followed by the token value
 * Example: { authorization: 'Bearer eyJhbGciOiJIUz.I1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiO' }  
   (please note this is not an actual token)
-
-### Routes Use
-#### AUTHENTICATION
+#### Logins
 Signup
 Requires: a body with { email, password, firstname, lastname }
 Returns: the user's token in a key/value object { Auth: token }
@@ -35,6 +34,11 @@ Requires: a body with { email, password }
 Returns: that user's token in a key/value object { Auth: token }
 
 Update
-Requires: a valid token, body with either/both { email, password }
+Requires: a valid token from the user, body with either/both { email, password }
 Returns: the user id on success
 
+#### Route Protection:
+* isUser: verifies that provided token belongs to an existing user or admin in the database
+* isAdmin: verifies that provided token belongs to an existing admin in the database
+* matchesThisUser: verifies that the provided token matches an existing user/admin in the database, and that their id matches the userId in the requested route
+* matchesThisUserOrAdmin: verifies that the provided token matches an existing user/admin in the database, and that their id matches the userId in the requested route *OR* that the token belongs to an admin without requiring an id match
