@@ -10,12 +10,12 @@ describe('Daily Question Model', () => {
     })
   })
 
-  // beforeEach(() => {
-  //   return db.seed.run({ directory: './db/seeds_test' })
-  //   .catch(err => {
-  //     console.error(err)
-  //   })
-  // })
+  beforeEach(() => {
+    return db.seed.run()
+    .catch(err => {
+      console.error(err)
+    })
+  })
 
   afterAll(() => {
     return db.destroy()
