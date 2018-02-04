@@ -4,4 +4,4 @@ node_js:
 services:
   - postgresql
 before_script:
-  - cp ./db/server-state.json.sample ./db/server-state.json; psql -c 'create database quoi_test;' -U postgres
+  - cp ./db/server-state.json.sample ./db/server-state.json; export KNEX_TEST_TIMEOUT=30000; psql -c 'create database quoi_test;' -U postgres
