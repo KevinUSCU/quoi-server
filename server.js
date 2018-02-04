@@ -54,8 +54,10 @@ app.use((err, _req, res, _next) => {
 })
 
 /*--- Server Tasks ---*/
-const TaskrunnerModel = require('./models/taskrunner.model')
-global.TASKRUNNER = new TaskrunnerModel()
-TASKRUNNER.start()
+if (environment !== 'test') {
+  const TaskrunnerModel = require('./models/taskrunner.model')
+  global.TASKRUNNER = new TaskrunnerModel()
+  TASKRUNNER.start()
+}
 
 module.exports = app
