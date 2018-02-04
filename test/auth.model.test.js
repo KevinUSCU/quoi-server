@@ -5,24 +5,27 @@ describe('Auth Model', () => {
 
   beforeAll(() => {
     return db.migrate.latest()
+    .then()
     .catch(err => {
       console.error(err)
     })
-  }, 10000)
+  })
 
   beforeEach(() => {
     return db.seed.run()
+    .then()
     .catch(err => {
       console.error(err)
     })
-  }, 10000)
+  })
 
   afterAll(() => {
     return db.destroy()
+    .then()
     .catch(err => {
       console.error(err)
     })
-  }, 10000)
+  })
 
   describe('View all', () => {
     test('It should throw an error if .all() method is called', () => {

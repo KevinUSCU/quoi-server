@@ -5,24 +5,27 @@ describe('Daily Question Model', () => {
 
   beforeAll(() => {
     return db.migrate.latest()
+    .then()
     .catch(err => {
       console.error(err)
     })
-  }, 10000)
+  })
 
   beforeEach(() => {
     return db.seed.run()
+    .then()
     .catch(err => {
       console.error(err)
     })
-  }, 10000)
+  })
 
   afterAll(() => {
     return db.destroy()
+    .then()
     .catch(err => {
       console.error(err)
     })
-  }, 10000)
+  })
 
   describe('Find (by date)', () => {
     test('It should return the daily question for an existing date', () => {
