@@ -9,15 +9,14 @@
 ## Installation
 1. npm install
 2. cp .env.sample .env
-3. cp db/server-state.json.sample db/server-state.json
 ### Development
-4. createdb quoi_dev
-5. npm run knex migrate:latest
-6. npm run knex seed:run
-7. npm run dev
+3. createdb quoi_dev
+4. npm run knex migrate:latest
+5. npm run knex seed:run
+6. npm run dev
 ### Testing
-(db is created and removed automatically by test)
-4. npm test
+(db is created and removed automatically by tests)
+3. npm test
 
 ### Tokens
 When a token is required for a route, it follows the following format:
@@ -39,6 +38,3 @@ Update
 Requires: a valid token, body with either/both { email, password }
 Returns: the user id on success
 
-
-## Next Steps
-[ ] ...

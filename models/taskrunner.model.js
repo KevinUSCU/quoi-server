@@ -4,13 +4,11 @@ const { DailyQuestionModel, QuestionModel, TipModel } = require('./')
 
 class TaskrunnerModel {
 
-  constructor(stateFile) {
-    const previousState = JSON.parse(fs.readFileSync(stateFile, 'utf-8'))
-    this.date = previousState.date
-    this.tipOfTheDay = previousState.tipOfTheDay
-    this.questionOfTheDay = previousState.questionOfTheDay
+  constructor() {
+    this.date = moment().utcOffset("-08:00").toJSON()
+    this.tipOfTheDay = ""
+    this.questionOfTheDay = null
     this.taskTimer = null
-    this.stateFile = stateFile
   }
 
   start() {
@@ -23,13 +21,25 @@ class TaskrunnerModel {
   }
 
   _firstRun() {
-    // Check for instance where reseeding has occurred and saved state is out of sync with database
-    // If we are in sync, there should be a match for this.date in the daily_question table
-    DailyQuestionModel.findByDate(moment(this.date).toJSON())
-    .then(dailyQuestion => {
-      if (!dailyQuestion) { // Out of sync; force update by rewinding day such that next update will refresh
-        this.date = moment().subtract(2, 'days').utcOffset("-08:00").toJSON()
+    // Load a new tip, and find the newest question
+    const promises = [ TipModel.randomNewTipOfTheDay(), DailyQuestionModel.getQuestionWithNewestDate() ]
+    Promise.all(promises)
+    .then(results => {
+      this.tipOfTheDay = results[0]
+      // Check for existing daily question
+      if (results[1]) { 
+        // Check that date matches
+        let currentDate = moment(this.date).utcOffset("-08:00").format('YYYYMMDD')
+        let retrievedDate = moment(results[1].date).utcOffset("-08:00").format('YYYYMMDD')
+        if (currentDate === retrievedDate) return results[1] // If match, retrieve existing question
       }
+      // If nothing, or does not match, generate new question
+      console.log('Server has updated itself with new daily data.')
+      return QuestionModel.randomNewQuestionOfTheDay(this.date)
+    })
+    .then(result => {
+      const { id, question, choices, answer, explanation, infopedia_id, image_url, deleted } = result
+      this.questionOfTheDay = { id, question, choices, answer, explanation, infopedia_id, image_url, deleted }
       return
     })
   }
@@ -46,7 +56,7 @@ class TaskrunnerModel {
         this.tipOfTheDay = results[0]
         const { id, question, choices, answer, explanation, infopedia_id, image_url, deleted } = results[1]
         this.questionOfTheDay = { id, question, choices, answer, explanation, infopedia_id, image_url, deleted }
-        fs.writeFileSync(this.stateFile, JSON.stringify({ date: this.date, tipOfTheDay: this.tipOfTheDay, questionOfTheDay: this.questionOfTheDay }))
+        return
       })
     }
   }
