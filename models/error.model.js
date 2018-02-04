@@ -22,6 +22,7 @@ function processErrorMessage(err) {
       case 'noSuchRoute': return { status: 404, message: 'This is not a valid route' }
       case 'noSuchInfopedia': return { status: 404, message: 'This infopedia article does not exist' }
       case 'noSuchQuestion': return { status: 404, message: 'This question does not exist' }
+      case 'noSuchQuestionForUser': return { status: 404, message: 'This question does not exist for this user' }
       case 'noSuchTip': return { status: 404, message: 'This tip does not exist' }
       case 'noSuchUser': return { status: 404, message: 'This user does not exist' }
       case 'requestorInvalid': return { status: 401, message: 'Requestor is not a valid user' }
