@@ -31,7 +31,10 @@ class TaskrunnerModel {
         // Check that date matches
         let currentDate = moment(this.date).utcOffset("-08:00").format('YYYYMMDD')
         let retrievedDate = moment(results[1].date).utcOffset("-08:00").format('YYYYMMDD')
-        if (currentDate === retrievedDate) return results[1] // If match, retrieve existing question
+        if (currentDate === retrievedDate) { // Match
+          this.date = results[1].date // We need to set our date to the date of the question so we can find it later
+          return results[1] // Retrieve existing question
+        }
       }
       // If nothing, or does not match, generate new question
       console.log('Server has updated itself with new daily data.')
