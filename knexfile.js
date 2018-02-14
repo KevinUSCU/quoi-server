@@ -17,10 +17,10 @@ module.exports = {
     client: 'pg',
     connection: 'postgres://localhost/quoi_test',
     migrations: {
-      directory: path.join(__dirname, 'db', 'migrations_test')
+      directory: path.join(__dirname, 'test/db', 'migrations')
     },
     seeds: {
-      directory: path.join(__dirname, 'db', 'seeds_test')
+      directory: path.join(__dirname, 'test/db', 'seeds')
     }
   },
 
