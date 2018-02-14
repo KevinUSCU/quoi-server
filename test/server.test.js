@@ -1,6 +1,6 @@
 const request = require('supertest')
 const app = require('../server')
-const db = require('../db/knex.js') // Use this to close database at end of test
+const db = require('../db/knex') // Use this to close database at end of test
 
 afterAll(() => {
   return db.destroy()
