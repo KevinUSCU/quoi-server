@@ -1,6 +1,9 @@
 # Quoi API Server
 > JavaScript/Express-based backend API server for Quoi, my Galvanize Capstone project.
 
+This server handles auth, users, questions and supporting resources intended for the [Quoi iOS app](https://github.com/KevinUSCU/quoi-ios).
+
+The Quoi backend automatically pulls a new daily question and daily tip from it's database every day (these are chosen at random from the pool, but are the same for all users on a given day). It will not recycle and repeat any of the same questions or tips until the entire stack has been exhausted.
 
 ## Database Structure
 
