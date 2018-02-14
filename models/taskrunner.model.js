@@ -1,5 +1,5 @@
 const fs = require('fs')
-const moment = require('moment');
+const moment = require('moment')
 const { DailyQuestionModel, QuestionModel, TipModel } = require('./')
 
 class TaskrunnerModel {
